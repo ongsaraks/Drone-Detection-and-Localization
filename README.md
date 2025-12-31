@@ -10,7 +10,7 @@ This project investigates how vision-based models can detect drones and estimate
 
 ---
 
-## What I Did
+## What We Did
 - Implemented a detection model to identify drones in visual input
 - Designed a pipeline to track detected drones
 - Applied regression models to estimate latitude and longitude
