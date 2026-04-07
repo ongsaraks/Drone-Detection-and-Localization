@@ -1,0 +1,88 @@
+# TESA Top Gun Rally 2025 – Group 38  
+การแข่งขันการประชันทักษะด้านระบบสมองกลฝังตัว ครั้งที่ 19  
+ณ โรงเรียนนายร้อยพระจุลจอมเกล้า จังหวัดนครนายก  
+ภายใต้หัวข้อ **“นวัตกรรมเพื่อการป้องกันประเทศ”**
+
+เว็บไซต์รายละเอียดการแข่งขัน:  
+https://weerapatserver.com/TESA-Top-Gun-Rally-2025.html
+
+GitHub Repository:  
+https://github.com/FilmPNG/TESA19_2025_G38_v2
+
+---
+
+## 📌 Overview
+โปรเจกต์นี้พัฒนาขึ้นเพื่อใช้แข่งขันในงาน **TESA Top Gun Rally 2025**  
+ระบบประกอบด้วย Backend, Frontend และ Database ที่รันผ่าน Docker เพื่อความสะดวกในการเซตอัปและการทำงานร่วมกันของระบบทั้งหมด
+
+---
+
+## Tech Stack
+
+### Frontend
+- Vite + React
+
+### Backend
+- Node.js + Express
+- MQTT / Socket.io
+- MySQL
+
+### Tools & Environment
+- Docker / Docker Compose
+- phpMyAdmin
+
+---
+
+## วิธีการรันระบบ
+
+### 1) เพิ่ม .env file
+เพิ่ม .env ไว้ที่ root ของโปรเจค
+```
+PORT=3000
+MYSQL_ROOT_PASSWORD=root1234
+MYSQL_DATABASE=mydb
+MYSQL_USER=myuser
+MYSQL_PASSWORD=mypass
+```
+
+### 2) รัน Docker Services
+ให้อยู่ในระดับเดียวกับไฟล์ `docker-compose.yml` แล้วพิมพ์:
+```bash
+docker compose up --build
+```
+
+### 3) รัน Frontend (Vite)
+เปิด Terminal ใหม่แล้วพิมพ์:
+```bash
+cd my-vite-app
+npm run dev
+```
+
+### 4) เปิดเว็บเบราว์เซอร์แล้วเข้า:
+- Frontend → http://localhost:5173
+- Backend Server → http://localhost:3000
+- phpMyAdmin → http://localhost:8080
+
+---
+
+### การตั้งค่า User (Admin):
+หากยังไม่มีบัญชีผู้ใช้ ให้สร้างผ่าน phpMyAdmin แล้วใช้คำสั่ง SQL นี้:
+```bash
+INSERT INTO users (username, password_hash, role)
+VALUES ('admin', '$2a$10$Z8isJfWJ/P5t5mk6c7.vHurPV2nqSB25eIdi.PjNDhhd59vUYnBSy', 'admin');
+```
+
+### ข้อมูลเข้าสู่ระบบ:
+```bash
+Username: admin
+Password: 1234
+```
+
+---
+
+### ทีมพัฒนา สวนและบ้าน2025 มหาวิทยาลัยมหิดล:
+- นางสาวฐิติวรดา โมฬีชาติ นักศึกษาชั้นปีที่ 2 (DST)
+- นางสาวธนัญชนก ชื่นแสง นักศึกษาชั้นปีที่ 2 (DST)
+- นายวีรภัทร อภิภูวงศ์ นักศึกษาชั้นปีที่ 3 (DST)
+- นายองศา รักสลาม นักศึกษาชั้นปีที่ 3 (ICT)
+- นายฐณดล ยินดีสุข นักศึกษาชั้นปีที่ 3 (ICT)
