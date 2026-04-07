@@ -1,0 +1,16 @@
+.git/
+**/__pycache__/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.venv/
+**/venv/
+**/node_modules/
+**/dist/
+**/build/
+DetectionANDLocalization.ipynb
+*.log
+*.tmp
+*.bak
+*.pt
+*.joblib
+*.mp4

@@ -22,10 +22,11 @@ import jwt
 
 # --- Socket.IO Setup ---
 # SERVER_URL = "http://192.168.10.10:3000"
-SERVER_URL = "http://localhost:3000"
-USERNAME = "admin"
-PASSWORD = "1234"
+SERVER_URL = os.getenv("SERVER_URL", "http://localhost:3000")
+USERNAME = os.getenv("USERNAME", "admin")
+PASSWORD = os.getenv("PASSWORD", "1234")
 JWT_SECRET = os.getenv("JWT_SECRET", "your_strong_secret_key_drone_control_center_2025")
+HEADLESS = os.getenv("HEADLESS", "0") == "1"
 
 # Create Socket.IO client
 sio = socketio.Client()
@@ -316,9 +317,9 @@ def connect_socketio():
         return False
 
 # --- 1. Setup Paths and Model ---
-INPUT_DIR = r"P3_VIDEO__DAY3.mp4"
-YOLO_MODEL_PATH = r"longest.pt"
-GBR_MODEL_PATH = r"gb_multioutput.joblib"
+INPUT_DIR = os.getenv("INPUT_PATH", r"P3_VIDEO__DAY3.mp4")
+YOLO_MODEL_PATH = os.getenv("YOLO_MODEL_PATH", r"longest.pt")
+GBR_MODEL_PATH = os.getenv("GBR_MODEL_PATH", r"gb_multioutput.joblib")
 
 # --- Load GBR Model ---
 print(f"Loading GBR model from {GBR_MODEL_PATH}...")
@@ -649,11 +650,11 @@ while cap.isOpened():
                 current_y += line_height + 15
 
         # --- 5e. Display the Frame ---
-        cv2.imshow("Custom YOLOv11 Tracker", final_frame)
-
-        key = cv2.waitKey(1) & 0xFF
-        if key == ord('q'):
-            break
+        if not HEADLESS:
+            cv2.imshow("Custom YOLOv11 Tracker", final_frame)
+            key = cv2.waitKey(1) & 0xFF
+            if key == ord('q'):
+                break
 
     except KeyboardInterrupt:
         break
@@ -664,7 +665,8 @@ while cap.isOpened():
 # --- 6. Cleanup ---
 print("🧹 Cleaning up...")
 cap.release()
-cv2.destroyAllWindows()
+if not HEADLESS:
+    cv2.destroyAllWindows()
 if torch.cuda.is_available():
     torch.cuda.empty_cache()
 gc.collect()

@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.7
 # ใช้ Node.js base image
 FROM node:20
 
@@ -8,7 +9,8 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # ติดตั้ง dependencies
-RUN npm install
+RUN --mount=type=cache,target=/root/.npm \
+	sh -c "npm ci --omit=dev || npm install --omit=dev"
 
 # คัดลอกไฟล์ทั้งหมดเข้ามา
 COPY . .
